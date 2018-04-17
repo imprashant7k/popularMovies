@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Popular Movies</string>
+    <string name="imageViewForPosters">Movie Posters</string>
+    <string name="topRated">Top Rated</string>
+    <string name="synopsis">Synopsis</string>
+    <string name="ratings">Ratings</string>
+    <string name="releaseDate">Release Date</string>
 </resources>

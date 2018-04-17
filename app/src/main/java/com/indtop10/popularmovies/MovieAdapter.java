@@ -8,30 +8,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import com.squareup.picasso.Picasso;
-
 import java.util.List;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder> {
 
-    private List<Movie> movies;
-
-    private Context cx;
+    private final List<Movie> movies;
+    private final Context cx;
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        public ImageView imageView;
-        public TextView textView;
+        private final ImageView imageView;
 
-
-        public MyViewHolder(final View itemView) {
+        private MyViewHolder(final View itemView) {
             super(itemView);
 
             itemView.setOnClickListener(this);
-            imageView = (ImageView) itemView.findViewById(R.id.imageView);
+            imageView = itemView.findViewById(R.id.imageView);
         }
 
         @Override

@@ -5,6 +5,7 @@
     android:layout_height="wrap_content">
 
     <ImageView
+        android:contentDescription="@string/imageViewForPosters"
         android:adjustViewBounds="true"
         android:layout_margin="1dp"
         android:id="@+id/imageView"

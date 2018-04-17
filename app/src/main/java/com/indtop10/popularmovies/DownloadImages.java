@@ -1,35 +1,30 @@
 package com.indtop10.popularmovies;
 
 import android.os.AsyncTask;
-import android.widget.Toast;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import static android.provider.ContactsContract.CommonDataKinds.Website.URL;
+class DownloadImages extends AsyncTask<Void,Void,String> {
 
-public class DownloadImages extends AsyncTask<Void,Void,String> {
-
-    String reponse = null;
-    String movieUrl = null;
+    private String response = null;
+    private final String movieUrl;
 
     public interface AsyncResponse{
 
         void processFinish(String output);
     }
 
-    public AsyncResponse delegate = null;
+    private final AsyncResponse delegate;
 
     public DownloadImages(AsyncResponse delegate,String url)
     {
-
         this.delegate = delegate;
         this.movieUrl = url;
     }
@@ -37,34 +32,29 @@ public class DownloadImages extends AsyncTask<Void,Void,String> {
     @Override
     protected String doInBackground(Void... voids) {
 
-
         try {
-            URL url = new URL(movieUrl);
 
+            URL url = new URL(movieUrl);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
             conn.setRequestMethod("GET");
 
             InputStream in = new BufferedInputStream(conn.getInputStream());
 
-            reponse = convertToString(in);
+            response = convertToString(in);
 
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return reponse;
+        return response;
     }
 
     private String convertToString(InputStream in)
     {
-
-
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-
         StringBuilder sb = new StringBuilder();
-
         String line;
 
         try {
@@ -76,7 +66,6 @@ public class DownloadImages extends AsyncTask<Void,Void,String> {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return sb.toString();
     }
 
@@ -84,7 +73,6 @@ public class DownloadImages extends AsyncTask<Void,Void,String> {
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
 
-        delegate.processFinish(reponse);
-
+        delegate.processFinish(response);
     }
 }
